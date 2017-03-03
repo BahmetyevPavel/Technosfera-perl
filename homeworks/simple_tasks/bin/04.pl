@@ -26,11 +26,22 @@ run(6) - печатает "1\n"
 sub run {
     my ($x) = @_;
     my $num = 0;
+    my $temp = $x;
+    
+    for ( $num; ; $num++)
+    {
+        $temp = $temp >> $num;
+        $temp = $temp << $num;
+        
+        if ( $temp != $x)
+        {
+            last;
+        }
 
-    # ...
-    # Вычисление номера первого ненулевого бита 
-    # ...
-
+    }
+    
+    $num--;
+    
     print "$num\n";
 }
 

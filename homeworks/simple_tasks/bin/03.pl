@@ -24,14 +24,13 @@ run(1, 2, 2) - печатает "1, 2\n"
 =cut
 
 sub run {
-    my ($x, $y, $z) = @_;
-    my $min = undef;
-    my $max = undef;
-
-    # ...
-    # Вычисление минимума и максимума
-    # ...
-
+    my @inputarray = @_;
+    #print join " ", "inputarray:", @inputarray, "\n";
+    my @outputarray = sort {$a <=> $b} @inputarray;
+    #print join " ", "outputarray:", @outputarray, "\n";
+    my $min = $outputarray[0];
+    my $max = $outputarray[$#outputarray];
+    
     print "$min, $max\n";
 }
 
