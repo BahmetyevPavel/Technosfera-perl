@@ -27,9 +27,18 @@ sub encode {
     
     for my $i (0..$#arr)
     {
-    $arr[$i]=ord($arr[$i]);
-    $arr[$i]=$arr[$i]+$key;
-    $arr[$i]=chr($arr[$i]);
+        $arr[$i]=ord($arr[$i]);
+        
+        if ( ($arr[$i]+($key % 128)) > 127 )
+        {
+            $arr[$i]=($arr[$i]+($key % 128))-128;
+        }
+        else
+        {
+            $arr[$i]=$arr[$i]+($key % 128);
+        }
+        
+        $arr[$i]=chr($arr[$i]);
     }
     
     $encoded_str =  join  '', @arr;
@@ -57,7 +66,16 @@ sub decode {
     for my $i (0..$#arr)
     {
         $arr[$i]=ord($arr[$i]);
-        $arr[$i]=$arr[$i]-$key;
+        
+        if ( ($arr[$i]-($key % 128)) < 0 )
+        {
+            $arr[$i]=128 + ($arr[$i]-($key % 128));
+        }
+        else
+        {
+            $arr[$i]=$arr[$i]-($key % 128);
+        }
+        
         $arr[$i]=chr($arr[$i]);
     }
     
